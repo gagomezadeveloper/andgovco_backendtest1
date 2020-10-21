@@ -31,7 +31,7 @@ namespace AndGovCo_backendTest_1.Models
 
         public int ProductStateID { get; set; }
 
-        public int ProducTypeID { get; set; }
+        public int ProductTypeID { get; set; }
 
         public int? AreaID { get; set; }
 

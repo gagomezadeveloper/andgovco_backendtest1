@@ -5,9 +5,9 @@ using AndGovCo_backendTest_1.Models;
 
 namespace AndGovCo_backendTest_1.Data
 {
-    public class AppContext : DbContext
+    public class AppDataContext : DbContext
     {
-        public AppContext(DbContextOptions<AppContext> options) : base(options) { }
+        public AppDataContext(DbContextOptions<AppDataContext> options) : base(options) { }
 
         public DbSet<Area> Areas { get; set; }
         public DbSet<Product> Products { get; set; }

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using AndGovCo_backendTest_1.Data;
 
 namespace AndGovCo_backendTest_1
 {
@@ -26,6 +28,13 @@ namespace AndGovCo_backendTest_1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<AppDataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDataContext")));
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options => //Microsoft.AspNetCore.Mvc.NewtonsoftJson
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +44,9 @@ namespace AndGovCo_backendTest_1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
