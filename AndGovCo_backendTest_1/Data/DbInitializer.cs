@@ -50,8 +50,8 @@ namespace AndGovCo_backendTest_1.Data
             {
                 new Product { Name = "Inspi 3000", Description = "Laptos economica para el hogar.", Serial = "3000", PurchaseValue = 1950000, PurchaseDate = DateTime.Now, ProductStateID = 1, ProductTypeID = 1, AreaID =  1},
                 new Product { Name = "Inspi 5000", Description = "Laptos economica para el hogar.", Serial = "5000", PurchaseValue = 1550000, PurchaseDate = DateTime.Now, ProductStateID = 2, ProductTypeID = 1, AreaID =  1},
-                new Product { Name = "XXS 10", Description = "PC para profesionales.", Serial = "10", PurchaseValue = 2500000, PurchaseDate = DateTime.Now, ProductStateID = 3, ProductTypeID = 2, AreaID =  2},
-                new Product { Name = "XXS 12", Description = "PC para profesionales.", Serial = "12", PurchaseValue = 2300333, PurchaseDate = DateTime.Now, ProductStateID = 1, ProductTypeID = 2, AreaID =  2},
+                new Product { Name = "XXS 10", Description = "PC para profesionales.", Serial = "100", PurchaseValue = 2500000, PurchaseDate = DateTime.Now, ProductStateID = 3, ProductTypeID = 2, AreaID =  2},
+                new Product { Name = "XXS 12", Description = "PC para profesionales.", Serial = "120", PurchaseValue = 2300333, PurchaseDate = DateTime.Now, ProductStateID = 1, ProductTypeID = 2, AreaID =  2},
                 new Product { Name = "Impresora laser V105", Description = "Impresora profesional.", Serial = "105", PurchaseValue = 500000, PurchaseDate = DateTime.Now, ProductStateID = 2, ProductTypeID = 3, AreaID =  1},
                 new Product { Name = "Impresora P700", Description = "Impresora para el hogar.", Serial = "700", PurchaseValue = 250000, PurchaseDate = DateTime.Now, ProductStateID = 3, ProductTypeID = 3, AreaID =  2},
             };

@@ -12,88 +12,37 @@ namespace AndGovCo_backendTest_1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class PsController : ControllerBase
     {
         private readonly AppDataContext _context;
 
-        public ProductsController(AppDataContext context)
+        public PsController(AppDataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Products
+        // GET: api/Ps
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-
-            var products = await _context.Products
-                .Include(a => a.Area)
-                .Include(s => s.ProductState)
-                .Include(t => t.ProductType)
-                .AsNoTracking()
-                .ToListAsync();
-
-            return products;
-
+            return await _context.Products.ToListAsync();
         }
 
-        // GET: api/Options
-        [HttpGet("GetOptions")]
-        public async Task<ActionResult> GetOptions()
-        {
-            var productStates = await _context.ProductStates
-                .Where(s => s.State == true)
-                .AsNoTracking()
-                .ToListAsync();
-
-            var productTypes = await _context.ProductTypes
-                .Where(t => t.State == true)
-                .AsNoTracking()
-                .ToListAsync();
-
-            var areas = await _context.Areas
-                .Where(a => a.State == true)
-                .AsNoTracking()
-                .ToListAsync();
-
-            return Ok(new
-            {
-                productStates,
-                productTypes,
-                areas
-            });
-        }
-
-        // GET: api/Products/5
+        // GET: api/Ps/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(long id)
         {
-            try
-            {
-                var product = await _context.Products
-                .Include(s => s.ProductState)
-                .Include(t => t.ProductType)
-                .Include(a => a.Area)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.ID == id);
+            var product = await _context.Products.FindAsync(id);
 
-                if(product == null)
-                {
-                    return NotFound();
-                }
-
-                return product;
-            }
-            catch (Exception ex)
+            if (product == null)
             {
-                return StatusCode(500, new
-                {
-                    error = $"Ha ocurrido un error en el servidor {ex.Message}."
-                });
+                return NotFound();
             }
+
+            return product;
         }
 
-        // PUT: api/Products/5
+        // PUT: api/Ps/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -125,7 +74,7 @@ namespace AndGovCo_backendTest_1.Controllers
             return NoContent();
         }
 
-        // POST: api/Products
+        // POST: api/Ps
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -137,7 +86,7 @@ namespace AndGovCo_backendTest_1.Controllers
             return CreatedAtAction("GetProduct", new { id = product.ID }, product);
         }
 
-        // DELETE: api/Products/5
+        // DELETE: api/Ps/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(long id)
         {

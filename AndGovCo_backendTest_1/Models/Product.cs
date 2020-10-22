@@ -18,7 +18,7 @@ namespace AndGovCo_backendTest_1.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "El campo Serial es requerido.")]
-        [RegularExpression(@"^[0-9]", ErrorMessage = "El campo Serial solo debe contener números.")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "El campo Serial de estar entre 3 y 20 caracteres.")]
         public string Serial { get; set; }
 
         [Required(ErrorMessage = "El campo Valor de compra es requerido.")]

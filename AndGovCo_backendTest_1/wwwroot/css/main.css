@@ -14,18 +14,23 @@ form label {
 
 /*#region Table*/
 .g-table {
-    text-align: left;
-    position: relative;
+    text-align: left !important;
+    position: relative !important;
     border-collapse: collapse !important;
+    width: 100%;
 }
 
 .g-table th {    
-    position: sticky;
-    top: 0;
+    position: sticky !important;
+    top: 0 !important;
 }
 
 .g-table input {
     cursor: pointer;
+}
+
+.g-table td, .g-table th {
+    padding: 10px;
 }
 
 /*#endregion*/
@@ -61,4 +66,72 @@ overflow: auto;
     background: grey;
 }
 
+/*#endregion*/
+
+/*#region Loader*/
+
+.g-loader-bg {
+    position: fixed;
+    z-index: 5000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    opacity: 0.7;
+}
+
+.g-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid purple;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+
+/*#endregion*/
+
+/*#region SearchInput*/
+.g-searchInput {
+    position: relative;    
+}
+
+@media only screen and (max-width:500px) {
+    .g-searchInput {
+        width: 100%;
+    }
+}
+
+.g-searchInput input {
+    padding: 5px 5px 5px 30px !important;
+}
+
+.g-searchInput i {
+    position: absolute;
+    top: 13px;
+    left: 7px;
+    height: 30px;
+    width: 30px;
+    font-size: 15px;
+}
 /*#endregion*/
