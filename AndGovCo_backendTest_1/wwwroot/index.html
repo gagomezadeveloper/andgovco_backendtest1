@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-deep-purple.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-
+<script src="https://kit.fontawesome.com/2d7d4f91ec.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 <style>
@@ -73,7 +74,10 @@
     <!-- !PAGE CONTENT! -->
     <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-        <div ng-view style="margin-top:75px"></div>
+        <div style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-theme"><b>Tecnologías</b></h1>
+        </div>
+        <div ng-view></div>
 
         <!-- Modal for full size images on click-->
         <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
@@ -88,7 +92,7 @@
     </div>
 
     <!-- W3.CSS Container -->
-    <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+    <div class="w3-bottom w3-light-grey w3-container w3-small" style="margin-top:20px;padding-right:20px">
         <p class="w3-right"><a title="power by"
                 target="_blank" class="w3-hover-opacity">Gustavo Adolfo Gómez Acevedo &copy;2020</a></p>
     </div>

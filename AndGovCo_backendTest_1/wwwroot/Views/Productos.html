@@ -1,25 +1,185 @@
-<h1>Productos</h1>
+<!-- Product -->
+<div>
 
-<!-- Contact -->
-<div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-theme"><b>Contact.</b></h1>
-    <hr style="width:50px;border:5px solid purple" class="w3-round">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting
-        new people!</p>
-    <form action="/action_page.php" target="_blank">
-        <div class="w3-section">
-            <label>Name</label>
-            <input class="w3-input w3-border" type="text" name="Name" requipurple>
+    <!--INDEX-->
+    <div ng-show="mode == 'index'">
+        <h4 class="w3-text-theme">Gestión</h4>
+        <div class="w3-row w3-container">
+            <div ng-click="mode = 'delete'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+                    class="far fa-trash-alt"></i></div>
+            <div ng-click="mode = 'set'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+                    class="fas fa-edit"></i></div>
+            <div ng-click="mode = 'get'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+                    class="far fa-eye"></i></div>
+            <div ng-click="mode = 'set'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+                    class="fas fa-plus"></i></div>
         </div>
-        <div class="w3-section">
-            <label>Email</label>
-            <input class="w3-input w3-border" type="text" name="Email" requipurple>
+        <div class="w3-padding g-scrollable" style="max-height: 300px;">
+            <table class="w3-table w3-striped g-table">
+                <thead>
+                    <tr class="w3-theme">
+                        <th><input ng-click="$ctrl.SelectAllElements(allElementsSelected = !allElementsSelected)"
+                                ng-model="$ctrl.allElementsSelected" type="checkbox" unchecked></th>
+                        <th>Serial</th>
+                        <th>Área</th>
+                        <th>Estado</th>
+                        <th>Nombre</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input ng-click="$ctrl.SelectElement(d)" ng-model="d.selected" type="checkbox" unchecked>
+                        </td>
+                        <td>Serial</td>
+                        <td>Área</td>
+                        <td>Estado</td>
+                        <td>Nombre</td>
+                        <td>Valor</td>
+                    </tr>
+                    <tr>
+                        <td><input ng-click="$ctrl.SelectElement(d)" ng-model="d.selected" type="checkbox" unchecked>
+                        </td>
+                        <td>Serial</td>
+                        <td>Área</td>
+                        <td>Estado</td>
+                        <td>Nombre</td>
+                        <td>Valor</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="w3-section">
-            <label>Message</label>
-            <input class="w3-input w3-border" type="text" name="Message" requipurple>
+    </div>
+    <!--SET - GET -->
+    <div ng-show="mode == 'set' || mode == 'get'">
+
+        <div class="w3-row">
+            <div>
+                
+            </div>
+            <div>
+
+            </div>
         </div>
-        <button type="submit" class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">Send
-            Message</button>
-    </form>
+        <h4 class="w3-text-theme">Crear</h4>
+
+        <form>
+            <div class="w3-row">
+                <div class="w3-section w3-third w3-padding">
+                    <label>Tipo</label>
+                    <select class="w3-select w3-border" name="option">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+                <div class="w3-section w3-third w3-padding">
+                    <label>Estado</label>
+                    <select class="w3-select w3-border" name="option">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+                <div class="w3-section w3-third w3-padding">
+                    <label>Área</label>
+                    <select class="w3-select w3-border" name="option">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+                <div class="w3-section w3-half w3-padding">
+                    <label>Serial</label>
+                    <input class="w3-input w3-border" type="text" name="Name" requipurple>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+                <div class="w3-section w3-half w3-padding">
+                    <label>Nombre</label>
+                    <input class="w3-input w3-border" type="text" name="Name" requipurple>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+                <div class="w3-section w3-rest w3-padding">
+                    <label>Descripción</label>
+                    <textarea style="resize: none;" class="w3-input w3-border" type="text" name="Name" requipurple
+                        rows="3"></textarea>
+                    <span class="w3-text-theme"> *Error message </span>
+                    <span style="font-size: small;" class="w3-text-grey w3-right"> 0/500 </span>
+                </div>
+                <div class="w3-section w3-half w3-padding">
+                    <label>Valor de compra</label>
+                    <input class="w3-input w3-border" type="number" name="Email" requipurple>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+                <div class="w3-section w3-half w3-padding">
+                    <label>Fecha de compra</label>
+                    <input class="w3-input w3-border" type="date" name="Message" requipurple>
+                    <span class="w3-text-theme"> *Error message </span>
+                </div>
+
+            </div>
+            <div class="w3-row w3-padding-32">
+                <div class="w3-quarter w3-padding">
+
+                </div>
+                <div class="w3-quarter w3-padding">
+                    <button ng-click="mode = 'index'" type="submit"
+                        class="w3-button w3-block w3-padding-large w3-light-grey w3-margin-bottom">
+                        Descartar
+                    </button>
+                </div>
+                <div class="w3-quarter w3-padding">
+                    <button type="submit" class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">
+                        Guardar
+                    </button>
+                </div>
+                <div class="w3-quarter w3-padding">
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <!--DELETE-->
+    <div ng-show="mode == 'delete'">
+        <h4 class="w3-text-theme">Eliminar</h4>
+
+        <form>
+            <div class="w3-row">
+
+                <div class="w3-section w3-col w3-padding" style="text-align: center;">
+                    <h3>¿Está seguro de eliminar este producto?</h3>
+                </div>
+
+            </div>
+            <div class="w3-row w3-padding-32">
+                <div class="w3-quarter w3-padding">
+
+                </div>
+                <div class="w3-quarter w3-padding">
+                    <button ng-click="mode = 'index'" type="submit"
+                        class="w3-button w3-block w3-padding-large w3-light-grey w3-margin-bottom">
+                        Descartar
+                    </button>
+                </div>
+                <div class="w3-quarter w3-padding">
+                    <button type="submit" class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">
+                        Eliminar
+                    </button>
+                </div>
+                <div class="w3-quarter w3-padding">
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
 </div>

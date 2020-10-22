@@ -1,0 +1,64 @@
+
+/*#region Form*/
+form span {
+    font-size: small;
+    font-weight: bold;    
+}
+
+form label {
+    font-size: small;
+    font-weight: bold;    
+    color: gray;
+}
+/*#endregion Form*/
+
+/*#region Table*/
+.g-table {
+    text-align: left;
+    position: relative;
+    border-collapse: collapse !important;
+}
+
+.g-table th {    
+    position: sticky;
+    top: 0;
+}
+
+.g-table input {
+    cursor: pointer;
+}
+
+/*#endregion*/
+
+/*#region Scrollable*/
+.g-scrollable {
+    overflow: auto;
+}
+
+/*.g-scrollable:hover {  
+overflow: auto;  
+}*/
+
+/* width */
+.g-scrollable::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 12px;
+}
+
+/* Track */
+.g-scrollable::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.g-scrollable::-webkit-scrollbar-thumb {
+    background: darkgray;
+}
+
+/* Handle on hover */
+.g-scrollable::-webkit-scrollbar-thumb:hover {
+    background: grey;
+}
+
+/*#endregion*/
