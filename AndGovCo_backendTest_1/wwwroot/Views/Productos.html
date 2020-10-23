@@ -2,18 +2,18 @@
 <div>
 
     <!--INDEX-->
-    <div ng-show="mode == 'index'">
+    <div ng-if="mode == 'index'">
         <div class="w3-row w3-container">
             <h4 class="w3-text-theme">Gestión</h4>
         </div>
         <div class="w3-row w3-container">
-            <div ng-click="mode = 'delete'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+            <div ng-click="ConfirmDeleteProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1"><i
                     class="far fa-trash-alt"></i></div>
-            <div ng-click="mode = 'set'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+            <div ng-click="EditProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1"><i
                     class="fas fa-edit"></i></div>
-            <div ng-click="mode = 'get'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+            <div ng-click="DetailProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1"><i
                     class="far fa-eye"></i></div>
-            <div ng-click="mode = 'set'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
+            <div ng-click="CreateProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
                     class="fas fa-plus"></i></div>
             <div class="g-searchInput w3-rest w3-text-theme w3-large" ng-show="true">
                 <input ng-model="filtro" class="w3-input w3-border" type="text" name="Search" requipurple>
@@ -25,9 +25,7 @@
                 <table class="w3-striped g-table">
                     <thead>
                         <tr class="w3-theme">
-                            <th class="w3-theme"><input
-                                    ng-click="SelectAllElements(allElementsSelected = !allElementsSelected)"
-                                    ng-model="allElementsSelected" type="checkbox" unchecked></th>
+                            <th class="w3-theme"><input ng-click="SelectAllElements()" ng-model="allElementsSelected" type="checkbox" unchecked></th>
                             <th class="w3-theme">Serial</th>
                             <th class="w3-theme">Área</th>
                             <th class="w3-theme">Estado</th>
@@ -37,7 +35,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="p in result = (products | filter: filtro)">
-                            <td><input ng-click="SelectElement(d)" ng-model="d.selected" type="checkbox" unchecked></td>
+                            <td><input ng-click="SelectElement(p)" ng-model="p.selected" type="checkbox" unchecked></td>
                             <td>{{p.serial}}</td>
                             <td>{{p.area.name}}</td>
                             <td>{{p.productState.name}}</td>
@@ -48,82 +46,81 @@
                 </table>
             </div>
         </div>
-        <div ng-if="result.length == 0" class="w3-row w3-container w3-text-theme w3-padding-32" style="width: 100%; text-align: center;">            
+        <div ng-if="result.length == 0" class="w3-row w3-container w3-text-theme w3-padding-32"
+            style="width: 100%; text-align: center;">
             <h4><i class="fas fa-ghost"></i> Busqueda sin datos...</h4>
         </div>
     </div>
     <!--SET - GET -->
-    <div ng-show="mode == 'set' || mode == 'get'">
+    <div ng-if="mode == 'create' || mode == 'edit' || mode == 'detail'">
 
         <div class="w3-row w3-container">
             <div class="w3-left">
-                <div ng-click="mode = 'index'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true">
+                <div ng-click="Back()" class="w3-button w3-right w3-text-theme w3-large" ng-show="true">
                     <i class="fas fa-arrow-left"></i>
                 </div>
             </div>
             <div class="w3-left">
-                <h4 class="w3-text-theme" style="line-height: 23px;">Crear</h4>
+                <h4 class="w3-text-theme" style="line-height: 23px;">{{formTitle}}</h4>
             </div>
         </div>
-
-        <form>
+        <div>
             <div class="w3-row">
                 <div class="w3-section w3-third w3-padding">
                     <label>Tipo</label>
-                    <select class="w3-select w3-border" name="option">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select ng-model="product.productTypeID" class="w3-select w3-border" name="option" ng-disabled="mode == 'detail'">
+                        <option value="0" disabled selected></option>
+                        <option ng-repeat="type in options.productTypes" ng-value="{{type.productTypeID}}">{{type.name}}
+                        </option>
                     </select>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <span ng-if="errors.ProductTypeID" class="w3-text-theme"> *{{errors.ProductTypeID[0]}} </span>
                 </div>
                 <div class="w3-section w3-third w3-padding">
                     <label>Estado</label>
-                    <select class="w3-select w3-border" name="option">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select ng-model="product.productStateID" class="w3-select w3-border" name="option" ng-disabled="mode == 'detail'">
+                        <option value="0" disabled selected></option>
+                        <option ng-repeat="state in options.productStates" ng-value="{{state.id}}">{{state.name}}
+                        </option>
                     </select>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <span ng-if="errors.ProductStateID" class="w3-text-theme"> *{{errors.ProductStateID[0]}} </span>
                 </div>
                 <div class="w3-section w3-third w3-padding">
                     <label>Área</label>
-                    <select class="w3-select w3-border" name="option">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select ng-model="product.areaID" class="w3-select w3-border" name="option" ng-disabled="mode == 'detail'">
+                        <option value="0" disabled selected></option>
+                        <option ng-repeat="area in options.areas" ng-value="{{area.id}}">{{area.name}}</option>
                     </select>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <span ng-if="errors.AreaID" class="w3-text-theme"> *{{errors.AreaID[0]}} </span>
                 </div>
                 <div class="w3-section w3-half w3-padding">
                     <label>Serial</label>
-                    <input class="w3-input w3-border" type="text" name="Name" requipurple>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <input ng-model="product.serial" class="w3-input w3-border" type="text" name="Name" requipurple ng-disabled="mode == 'detail'">
+                    <span ng-if="errors.Serial" class="w3-text-theme"> *{{errors.Serial[0]}} </span>
                 </div>
                 <div class="w3-section w3-half w3-padding">
                     <label>Nombre</label>
-                    <input class="w3-input w3-border" type="text" name="Name" requipurple>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <input ng-model="product.name" class="w3-input w3-border" type="text" name="Name" requipurple ng-disabled="mode == 'detail'">
+                    <span ng-if="errors.Name" class="w3-text-theme"> *{{errors.Name[0]}} </span>
                 </div>
                 <div class="w3-section w3-rest w3-padding">
                     <label>Descripción</label>
-                    <textarea style="resize: none;" class="w3-input w3-border" type="text" name="Name" requipurple
-                        rows="3"></textarea>
-                    <span class="w3-text-theme"> *Error message </span>
-                    <span style="font-size: small;" class="w3-text-grey w3-right"> 0/500 </span>
+                    <textarea ng-model="product.description" style="resize: none;" class="w3-input w3-border"
+                        type="text" name="Name" requipurple rows="3" ng-disabled="mode == 'detail'"></textarea>
+                    <span ng-if="errors.Description" class="w3-text-theme"> *{{errors.Description[0]}} </span>
+                    <span ng-show="product.description.length >= 0" style="font-size: small;"
+                        class="w3-text-grey w3-right"> {{product.description.length}}/500 </span>
                 </div>
                 <div class="w3-section w3-half w3-padding">
                     <label>Valor de compra</label>
-                    <input class="w3-input w3-border" type="number" name="Email" requipurple>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <input ng-model="product.purchaseValue" class="w3-input w3-border" type="number" name="Email"
+                        requipurple ng-disabled="mode == 'detail'">
+                    <span ng-if="errors.purchaseValue" class="w3-text-theme"> *{{errors.purchaseValue[0]}} </span>
                 </div>
                 <div class="w3-section w3-half w3-padding">
                     <label>Fecha de compra</label>
-                    <input class="w3-input w3-border" type="date" name="Message" requipurple>
-                    <span class="w3-text-theme"> *Error message </span>
+                    <input ng-model="product.purchaseDate" class="w3-input w3-border" type="date" name="Message"
+                        requipurple ng-disabled="mode == 'detail'">
+                    <span ng-if="errors.purchaseDate" class="w3-text-theme"> *{{errors.purchaseDate[0]}} </span>
                 </div>
 
             </div>
@@ -131,14 +128,15 @@
                 <div class="w3-quarter w3-padding">
 
                 </div>
-                <div class="w3-quarter w3-padding">
-                    <button ng-click="mode = 'index'" type="submit"
+                <div class="w3-quarter w3-padding" ng-if="mode != 'detail'">
+                    <button ng-click="Back()" type="submit"
                         class="w3-button w3-block w3-padding-large w3-light-grey w3-margin-bottom">
                         Descartar
                     </button>
                 </div>
-                <div class="w3-quarter w3-padding">
-                    <button type="submit" class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">
+                <div class="w3-quarter w3-padding" ng-if="mode != 'detail'">
+                    <button ng-click="SetProduct()" type="submit"
+                        class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">
                         Guardar
                     </button>
                 </div>
@@ -147,21 +145,21 @@
                 </div>
             </div>
 
-        </form>
+        </div>
     </div>
     <!--DELETE-->
-    <div ng-show="mode == 'delete'">
+    <div ng-if="mode == 'delete'">
         <div class="w3-row w3-container">
             <div class="w3-left">
-                <div ng-click="mode = 'index'" class="w3-button w3-right w3-text-theme w3-large" ng-show="true">
+                <div ng-click="Back()" class="w3-button w3-right w3-text-theme w3-large" ng-show="true">
                     <i class="fas fa-arrow-left"></i>
                 </div>
             </div>
             <div class="w3-left">
-                <h4 class="w3-text-theme" style="line-height: 23px;">Crear</h4>
+                <h4 class="w3-text-theme" style="line-height: 23px;">{{formTitle}}</h4>
             </div>
         </div>
-        <form>
+        <div>
             <div class="w3-row">
 
                 <div class="w3-section w3-col w3-padding" style="text-align: center;">
@@ -174,13 +172,13 @@
 
                 </div>
                 <div class="w3-quarter w3-padding">
-                    <button ng-click="mode = 'index'" type="submit"
+                    <button ng-click="Back()" type="submit"
                         class="w3-button w3-block w3-padding-large w3-light-grey w3-margin-bottom">
                         Descartar
                     </button>
                 </div>
                 <div class="w3-quarter w3-padding">
-                    <button type="submit" class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">
+                    <button ng-click="DeleteProduct()" type="submit" class="w3-button w3-block w3-padding-large w3-theme w3-margin-bottom">
                         Eliminar
                     </button>
                 </div>
@@ -189,7 +187,7 @@
                 </div>
             </div>
 
-        </form>
+        </div>
     </div>
 
 

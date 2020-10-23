@@ -77,7 +77,7 @@ namespace AndGovCo_backendTest_1.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.ID == id);
 
-                if(product == null)
+                if (product == null)
                 {
                     return NotFound();
                 }
@@ -131,6 +131,7 @@ namespace AndGovCo_backendTest_1.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
+           
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 

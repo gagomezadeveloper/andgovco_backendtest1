@@ -25,15 +25,22 @@ namespace AndGovCo_backendTest_1.Models
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal PurchaseValue { get; set; }
-
+        
         [DataType(DataType.Date)]        
+        [Required(ErrorMessage = "El campo Fecha de compra es requerido.")]
         public DateTime PurchaseDate { get; set; }
-
+            
+        [Required(ErrorMessage = "El campo Estado es requerido.")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo Estado es requerido.")]            
         public int ProductStateID { get; set; }
 
+        [Required(ErrorMessage = "El campo Tipo es requerido.")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo Tipo es requerido.")]
         public int ProductTypeID { get; set; }
 
-        public int? AreaID { get; set; }
+        [Required(ErrorMessage = "El campo Área es requerido.")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo Área es requerido.")] 
+        public int AreaID { get; set; }
 
         public ProductState ProductState { get; set; }
         public ProductType ProductType { get; set; }
