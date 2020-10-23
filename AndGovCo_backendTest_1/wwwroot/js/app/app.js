@@ -57,6 +57,7 @@ var dominio =
 
             $scope.Back = function () {                
                 $scope.mode = 'index'; 
+                $scope.errors = {};
                 $scope.GetProducts();
             };
             //#endregion
