@@ -9,9 +9,10 @@ namespace AndGovCo_backendTest_1.Data
     public static class DbInitializer
     {
         public static void Initialize(AppDataContext context)
-        {
-            // Solo si no hay productos en la base de datos
-            if (context.Products.Any())
+        {            
+
+            // Solo si no hay áreas en la base de datos
+            if (context.Areas.Any())
             {
                 return;
             }
@@ -25,6 +26,12 @@ namespace AndGovCo_backendTest_1.Data
             context.Areas.AddRange(areas);
             context.SaveChanges();
 
+            // Solo si no hay tipos en la base de datos
+            if (context.ProductTypes.Any())
+            {
+                return;
+            }
+
             // Agregar tipos de productos
             var productTypes = new ProductType[]
             {
@@ -35,6 +42,12 @@ namespace AndGovCo_backendTest_1.Data
             context.ProductTypes.AddRange(productTypes);
             context.SaveChanges();
 
+            // Solo si no hay estados en la base de datos
+            if (context.ProductStates.Any())
+            {
+                return;
+            }
+
             // Agregar estados de productos
             var productStates = new ProductState[]
             {
@@ -44,6 +57,12 @@ namespace AndGovCo_backendTest_1.Data
             };
             context.ProductStates.AddRange(productStates);
             context.SaveChanges();
+
+            // Solo si no hay productos en la base de datos
+            if (context.Products.Any())
+            {
+                return;
+            }
 
             // Agregar productos
             var products = new Product[]

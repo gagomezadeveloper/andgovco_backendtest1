@@ -55,8 +55,9 @@ var dominio =
                 }
             };
 
-            $scope.Back = function () {
-                $scope.mode = 'index';
+            $scope.Back = function () {                
+                $scope.mode = 'index'; 
+                $scope.GetProducts();
             };
             //#endregion
 
@@ -189,8 +190,7 @@ var dominio =
                                 console.log("response", response);
 
                                 $scope.loadingData = false;
-
-                                $scope.GetProducts();
+                                
                                 $scope.Back();
 
                                 resolve();
@@ -238,7 +238,6 @@ var dominio =
 
                                 $scope.loadingData = false;
 
-                                $scope.GetProducts();
                                 $scope.Back();
 
                                 resolve();
@@ -329,7 +328,6 @@ var dominio =
 
                                 $scope.loadingData = false;
 
-                                $scope.GetProducts();
                                 $scope.Back();
 
                                 resolve();

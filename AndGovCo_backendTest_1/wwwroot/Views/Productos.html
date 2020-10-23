@@ -7,14 +7,21 @@
             <h4 class="w3-text-theme">Gestión</h4>
         </div>
         <div class="w3-row w3-container">
-            <div ng-click="ConfirmDeleteProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1"><i
-                    class="far fa-trash-alt"></i></div>
-            <div ng-click="EditProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1"><i
-                    class="fas fa-edit"></i></div>
-            <div ng-click="DetailProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1"><i
-                    class="far fa-eye"></i></div>
-            <div ng-click="CreateProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="true"><i
-                    class="fas fa-plus"></i></div>
+            <div ng-click="ConfirmDeleteProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1">
+                <i class="far fa-trash-alt"></i>
+            </div>
+            <div ng-click="EditProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1">
+                <i class="fas fa-edit"></i>
+            </div>
+            <div ng-click="DetailProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="selectedElements.length == 1">
+                <i class="far fa-eye"></i>
+            </div>
+            <div ng-click="CreateProduct()" class="w3-button w3-right w3-text-theme w3-large" ng-show="true">
+                <i class="fas fa-plus"></i>
+            </div>
+            <div ng-click="GetProducts()" class="w3-button w3-right w3-text-theme w3-large" ng-show="true">
+                <i class="fas fa-sync-alt"></i>
+            </div>
             <div class="g-searchInput w3-rest w3-text-theme w3-large" ng-show="true">
                 <input ng-model="filtro" class="w3-input w3-border" type="text" name="Search" requipurple>
                 <i class="fas fa-search"></i>
